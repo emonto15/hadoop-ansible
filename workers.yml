@@ -1,7 +1,9 @@
 
 # Get Master Public Key
-- hosts: master 
-  remote_user: root
+- hosts: master
+  remote_user: ec2-user
+  become_user: root
+  become_method: sudo
   vars_files:
    - vars/user.yml
    - vars/var_basic.yml
@@ -9,8 +11,10 @@
   roles:
     - fetch_public_key
 
-- hosts: workers 
-  remote_user: root
+- hosts: workers
+  remote_user: ec2-user
+  become_user: root
+  become_method: sudo
   vars_files:
    - vars/user.yml
    - vars/var_basic.yml
@@ -27,5 +31,3 @@
     - authorized
     - java
     - hadoop
-
-

@@ -112,6 +112,10 @@ yarn_site_properties:
     "name": "yarn.nodemanager.aux-services.mapreduce.shuffle.class",
     "value": "org.apache.hadoop.mapred.ShuffleHandler"
   }
+  - {
+    "name": "yarn.webapp.ui2.enable",
+    "value": "true"
+  }
 
 dashbord_port: 9870
 firewall_ports:

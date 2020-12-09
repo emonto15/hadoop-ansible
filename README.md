@@ -12,7 +12,7 @@ Use DNS Server or update /etc/hosts for all servers
 1. Download Hadoop to any path
 2. Update the {{ download_path }} in vars/var_basic.yml
 ```
-download_path: "/home/pippo/Downloads" # your local path 
+download_path: "/home/pippo/Downloads" # your local path
 hadoop_version: "3.0.0" # your hadoop version
 hadoop_path: "/home/hadoop" # default in user "hadoop" home
 hadoop_config_path: "/home/hadoop/hadoop-{{hadoop_version}}/etc/hadoop"
@@ -21,10 +21,10 @@ hadoop_dfs_name: "/home/hadoop/dfs/name"
 hadoop_dfs_data: "/home/hadoop/dfs/data"
 
 ```
-3. Use ansible template to generate the hadoop configration, so If your want to add more properties, just update the vars/var_basic.yml.default is 
+3. Use ansible template to generate the hadoop configration, so If your want to add more properties, just update the vars/var_basic.yml.default is
 
 ```
-# hadoop configration 
+# hadoop configration
 hdfs_port: 9000
 core_site_properties:
   - {
@@ -107,7 +107,7 @@ yarn_site_properties:
   - {
     "name": "yarn.nodemanager.aux-services",
     "value": "mapreduce_shuffle"
-  } 
+  }
   - {
     "name": "yarn.nodemanager.aux-services.mapreduce.shuffle.class",
     "value": "org.apache.hadoop.mapred.ShuffleHandler"
@@ -133,7 +133,7 @@ hdfs_site_properties:
   }
   - {
       "name":"dfs.replication",
-      "value":"{{ groups['workers']|length }}"  # this is  the group "workers" you define in hosts/host 
+      "value":"{{ groups['workers']|length }}"  # this is  the group "workers" you define in hosts/host
   }
   - {
     "name":"dfs.webhdfs.enabled",
@@ -144,7 +144,7 @@ hdfs_site_properties:
 ### Install Master
 check the master.yml
 ```
-- hosts: master 
+- hosts: master
   remote_user: root
   vars_files:
    - vars/user.yml
@@ -154,13 +154,13 @@ check the master.yml
      add_user: true           # add user "hadoop"
      generate_key: true       # generate the ssh key
      open_firewall: true      # for CentOS 7.x is firewalld
-     disable_firewall: false  # disable firewalld 
+     disable_firewall: false  # disable firewalld
      install_hadoop: true     # install hadoop,if you just want to update the configuration, set to false
      config_hadoop: true      # Update configuration
   roles:
     - user                    # add user and generate the ssh key
     - fetch_public_key        # get the key and put it in your localhost
-    - authorized              # push the ssh key to the remote server 
+    - authorized              # push the ssh key to the remote server
     - java                    # install jdk
     - hadoop                  # install hadoop
 
@@ -174,8 +174,8 @@ ansible-playbook -i hosts/host master.yml
 ### Install Workers
 
 ```
-# Add Master Public Key   # get master ssh public key 
-- hosts: master 
+# Add Master Public Key   # get master ssh public key
+- hosts: master
   remote_user: root
   vars_files:
    - vars/user.yml
@@ -184,7 +184,7 @@ ansible-playbook -i hosts/host master.yml
   roles:
     - fetch_public_key
 
-- hosts: workers 
+- hosts: workers
   remote_user: root
   vars_files:
    - vars/user.yml
@@ -235,7 +235,7 @@ hive_warehouse: "/user/hive/warehouse"                                # your hdf
 hive_scratchdir: "/user/hive/tmp"
 hive_querylog_location: "/user/hive/log"
 
-hive_hdfs_path: 
+hive_hdfs_path:
   - "{{ hive_warehouse }}"
   - "{{ hive_scratchdir }}"
   - "{{ hive_querylog_location }}"
@@ -322,6 +322,9 @@ ansible-playbook -i hosts/host hive.yml
 
 ```
 
+## Useful links
+
+- https://www.linode.com/docs/guides/how-to-install-and-set-up-hadoop-cluster/
 
 ### License
 
