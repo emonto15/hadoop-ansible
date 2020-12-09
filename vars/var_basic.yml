@@ -8,8 +8,8 @@ java_packages:
 
 
 # hadoop basic vars
-download_path: "/home/pippo/Downloads"
-hadoop_version: "3.0.0"
+download_path: "/tmp/"
+hadoop_version: "3.2.1"
 hadoop_path: "/home/hadoop"
 hadoop_config_path: "/home/hadoop/hadoop-{{hadoop_version}}/etc/hadoop"
 hadoop_tmp: "/home/hadoop/tmp"
@@ -24,7 +24,7 @@ hadoop_create_path:
   - "{{ hadoop_log_path }}"
 
 
-# hadoop configration 
+# hadoop configration
 hdfs_port: 9000
 core_site_properties:
   - {
@@ -107,7 +107,7 @@ yarn_site_properties:
   - {
     "name": "yarn.nodemanager.aux-services",
     "value": "mapreduce_shuffle"
-  } 
+  }
   - {
     "name": "yarn.nodemanager.aux-services.mapreduce.shuffle.class",
     "value": "org.apache.hadoop.mapred.ShuffleHandler"
